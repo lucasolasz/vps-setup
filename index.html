@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração VPS</title>
+    <style>
+        body {
+            /* Centraliza todo o conteúdo no meio da tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0f172a; /* Fundo escuro */
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background-color: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 600px;
+            width: 90%;
+        }
+        .code-box {
+            background-color: #020617;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1rem;
+            color: #10b981; /* Texto verde estilo terminal */
+            border: 1px solid #334155;
+            word-wrap: break-word;
+        }
+        .copy-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .copy-btn.success {
+            background-color: #10b981;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🚀 Hardening & Setup Ubuntu</h2>
+        <p>Clique no botão abaixo para copiar o comando de instalação.</p>
+        
+        <div class="code-box" id="comando">curl -sSL https://gist.githubusercontent.com/lucasolasz/e75daf8c85bbc1d213d85aa6b2e403b9/raw/ | sudo bash</div>
+        
+        <button class="copy-btn" id="btnCopiar" onclick="copiarComando()">Copiar Comando</button>
+    </div>
+
+    <script>
+        function copiarComando() {
+            const comando = document.getElementById('comando').innerText;
+            
+            navigator.clipboard.writeText(comando).then(() => {
+                const btn = document.getElementById('btnCopiar');
+                btn.innerText = '✅ Copiado com sucesso!';
+                btn.classList.add('success');
+                
+                // Volta ao estado original após 2 segundos
+                setTimeout(() => {
+                    btn.innerText = 'Copiar Comando';
+                    btn.classList.remove('success');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+                alert('Ocorreu um erro ao copiar. Tente selecionar o texto manualmente.');
+            });
+        }
+    </script>
+
+</body>
+</html>
